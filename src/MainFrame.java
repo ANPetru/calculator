@@ -1,3 +1,7 @@
+
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,8 +25,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     public MainFrame() {
         initComponents();
+        initMyFields();
+    }
+    
+    public void initMyFields(){
+        accumulator=0;
+        operand=0;
+        operator=OperatorType.NONE;
+        erase = false;
+        decimalSeparator = getDecimalSeparator();
     }
 
+    public char getDecimalSeparator(){
+        DecimalFormatSymbols dfs= new DecimalFormatSymbols(Locale.getDefault());
+        return dfs.getDecimalSeparator();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
