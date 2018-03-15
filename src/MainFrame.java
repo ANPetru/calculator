@@ -12,21 +12,21 @@ import java.util.Locale;
  * @author victor
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     private enum OperatorType {
         NONE, ADD, SUBTRACT, MULTIPLY, DIVIDE
     }
-    
+
     private double accumulator, operand;
     private OperatorType operator;
     private char decimalSeparator;
     private boolean erase;
-    
+
     public MainFrame() {
         initComponents();
         initMyFields();
     }
-    
+
     public void initMyFields() {
         accumulator = 0;
         operand = 0;
@@ -34,20 +34,21 @@ public class MainFrame extends javax.swing.JFrame {
         erase = false;
         decimalSeparator = getDecimalSeparator();
     }
-    
-    private void eraseIfNeededAndWriteNumber(String numberStr){
-         if (erase) {
-            erase=false;
+
+    private void eraseIfNeededAndWriteNumber(String numberStr) {
+        if (erase) {
+            erase = false;
             textFieldDisplay.setText("");
         }
         textFieldDisplay.setText(textFieldDisplay.getText() + numberStr);
 
     }
+
     public char getDecimalSeparator() {
         DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.getDefault());
         return dfs.getDecimalSeparator();
     }
-    
+
     private void calculateResult() {
         operand = Double.parseDouble(textFieldDisplay.getText());
         switch (operator) {
@@ -68,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
         }
     }
-    
+
     private void displayResult() {
         textFieldDisplay.setText("" + accumulator);
     }
@@ -376,15 +377,24 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSubtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubtractActionPerformed
-        // TODO add your handling code here:
+        erase = true;
+        calculateResult();
+        displayResult();
+        operator = OperatorType.SUBTRACT;
     }//GEN-LAST:event_btnSubtractActionPerformed
 
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
-        // TODO add your handling code here:
+        erase = true;
+        calculateResult();
+        displayResult();
+        operator = OperatorType.MULTIPLY;
     }//GEN-LAST:event_btnMultiplyActionPerformed
 
     private void btnDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivideActionPerformed
-        // TODO add your handling code here:
+        erase = true;
+        calculateResult();
+        displayResult();
+        operator = OperatorType.DIVIDE;
     }//GEN-LAST:event_btnDivideActionPerformed
 
     private void btnEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEqualActionPerformed
@@ -392,7 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEqualActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        
+
         String s = textFieldDisplay.getText();
         if (s.length() > 0) {
             String subS = s.substring(0, s.length() - 1);
